@@ -6,6 +6,7 @@ Needs Python>=3.6
 
 from typing import List, Tuple
 
+
 class TicTacToe:
     """
     Represents a game of tic-tac-toe.
@@ -47,7 +48,7 @@ class TicTacToe:
         for player_info in players:
             count = len(player_info)
             if count != 2:
-                raise ValueError(f"player info tuple has 2 values. Got {count}")
+                raise ValueError(f"player tuple has 2 values. Got {count}")
 
             symbol = player_info[1]
             if len(symbol) != 1:
@@ -101,10 +102,11 @@ class TicTacToe:
 
         status = self._is_over()
         if status == 0:
-            self.turn = 1 if self.turn==0 else 0
+            self.turn = 1 if self.turn == 0 else 0
         elif status < 0:
             self.turn = None
         return status
+
 
 def display(grid: List[int]) -> None:
     """Displays the grid"""
@@ -136,6 +138,7 @@ def play(game: TicTacToe) -> None:
     else:
         print(f"{game.players[game.turn][0]} won!")
 
+
 if __name__ == "__main__":
-    ttt = TicTacToe(players = [("User", 'O'), ("PC", 'X')])
+    ttt = TicTacToe(players=[("User", 'O'), ("PC", 'X')])
     play(ttt)

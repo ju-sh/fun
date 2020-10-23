@@ -4,9 +4,11 @@ import pytest
 
 import ttt
 
+
 @pytest.fixture
 def game():
-    return ttt.TicTacToe(players = [("User", 'O'), ("PC", 'X')])
+    return ttt.TicTacToe(players=[("User", 'O'), ("PC", 'X')])
+
 
 @pytest.mark.parametrize('grid,expected', [
     (['O', None, 'X',
@@ -24,6 +26,7 @@ def test_is_over(game, grid, expected):
     game._empty = sum([1 for x in grid if x is None])
     assert game._is_over() == expected
 
+
 class TestNextTurn:
     @pytest.mark.parametrize('grid, cell_idx, expected', [
         (['O', 'X', 'X',
@@ -40,7 +43,7 @@ class TestNextTurn:
         game.grid = grid
         game._empty = sum([1 for x in grid if x is None])
         assert game.next_turn(cell_idx) == expected
-    
+
     @pytest.mark.parametrize('grid, cell_idx', [
         (['O', 'X', 'X',
           'X', None, 'O',
@@ -54,7 +57,8 @@ class TestNextTurn:
         game._empty = sum([1 for x in grid if x is None])
         with pytest.raises(ValueError):
             game.next_turn(cell_idx)
-        
+
+
 def test_display(capsys):
     grid = [None, 'X', 'X',
             'X', None, 'O',
