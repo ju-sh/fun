@@ -1,3 +1,14 @@
+# Haskell
+*.h[is]
+*.o
+a.out
+
+# OCaml
+*.cm[oi]
+
+# Coq
+.lia.cache
+
 # Python
 __pycache__/
 *.py[cod]
@@ -12,8 +23,8 @@ build/
 dist/
 *.egg-info/
 
-# Vim / VSCode / editors
-*.swp
+# Vim
+*.sw[op]
 
 # Unit test / coverage reports
 .tox/
