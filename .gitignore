@@ -9,6 +9,9 @@ a.out
 # Coq
 .lia.cache
 
+# ghdl
+work*.cf
+
 # Python
 __pycache__/
 *.py[cod]
