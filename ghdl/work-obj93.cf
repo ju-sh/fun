@@ -1,8 +1,0 @@
-v 4
-file . "8b-adder.vhdl" "88c06dceb62a89b967b209383cfa6e6b10e19ae6" "20211015070949.382":
-  entity and2 at 2( 20) + 0 on 31;
-  architecture boolean_eq2 of and2 at 11( 258) + 0 on 32;
-  entity or2 at 18( 354) + 0 on 33;
-  architecture boolean_eq of or2 at 26( 480) + 0 on 34;
-  entity xor2 at 33( 573) + 0 on 35;
-  architecture boolean_eq of xor2 at 41( 701) + 0 on 36;

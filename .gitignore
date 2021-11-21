@@ -10,7 +10,7 @@ a.out
 .lia.cache
 
 # ghdl
-work*.cf
+*.cf
 
 # Python
 __pycache__/
