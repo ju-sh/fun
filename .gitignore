@@ -11,6 +11,7 @@ a.out
 
 # ghdl
 *.cf
+*.vcd
 
 # Python
 __pycache__/

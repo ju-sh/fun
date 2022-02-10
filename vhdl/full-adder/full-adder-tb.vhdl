@@ -62,7 +62,7 @@ begin
     end loop;
     assert false report "end of tests" severity note;
 
-    -- wait forever (this will finish the simulation
+    -- wait forever (this will finish the simulation)
     wait;
   end process;
 end architecture;
