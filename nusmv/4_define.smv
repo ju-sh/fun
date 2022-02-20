@@ -1,0 +1,18 @@
+MODULE main
+
+VAR
+    x: boolean;
+    r: boolean;
+
+-- The DEFINE block doesn't really matter?
+DEFINE
+    y := !(x xor r);
+
+ASSIGN
+    init(r) := FALSE;
+    next(r) := x xor r;
+
+-- NuSMV -int five.smv
+-- go
+
+-- State of system depends only on the variables in the VAR block

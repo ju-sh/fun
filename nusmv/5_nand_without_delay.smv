@@ -1,0 +1,33 @@
+MODULE main
+
+VAR
+  in1: boolean;
+  in2: boolean;
+
+DEFINE
+  -- no delay
+  out := !(in1 & in2);
+
+-- no ASSIGN block => all possible transitions
+
+
+
+-- NuSMV > print_reachable_states -v
+-- ######################################################################
+-- system diameter: 1
+-- reachable states: 4 (2^2) out of 4 (2^2)
+--   ------- State    1 ------
+--   in1 = TRUE
+--   in2 = TRUE
+--   ------- State    2 ------
+--   in1 = TRUE
+--   in2 = FALSE
+--   ------- State    3 ------
+--   in1 = FALSE
+--   in2 = TRUE
+--   ------- State    4 ------
+--   in1 = FALSE
+--   in2 = FALSE
+--   -------------------------
+-- ######################################################################
+

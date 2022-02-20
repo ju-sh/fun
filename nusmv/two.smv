@@ -1,0 +1,40 @@
+MODULE main
+
+VAR
+    location: {l1, l2};
+    x: 0 .. 100;  -- only bounded integers
+
+ASSIGN
+    init(location) := l1;
+    init(x) := 0;
+
+    next(location) := case
+                          (location = l1) & (x < 10): l2;
+                          (location = l2): l1;
+                          TRUE: location;  -- no change (like an else clause)
+                      esac;
+
+    next(x) := case
+                   --(location = l1): x;
+                   (location = l2) & (x < 100): x + 1;
+                   TRUE: x;
+               esac;
+
+-- NuSMV -int
+-- read_model -i <in.smv>
+-- flatten_hierarchy
+-- encode_variables
+-- build_model
+--
+-- pick_state -i
+-- simulate -i -k 15
+-- print_reachable_states -v
+
+
+-- NuSMV > check_ltlspec -p "G(x>=0)"
+-- -- specification  G x >= 0  is true
+
+
+
+-- NuSMV > check_ltlspec -p "F(x>=5)"
+-- -- specification  F x >= 5  is true

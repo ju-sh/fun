@@ -1,0 +1,16 @@
+MODULE main
+VAR
+  main_in1: boolean;
+  main_in2: boolean;
+  q: nand2(main_in1, main_in2);
+
+
+MODULE nand2(nand_in1, nand_in2)
+VAR
+  out: boolean;
+ASSIGN
+  -- a unit delay is here
+  init(out) := TRUE;
+  next(out) := !(nand_in1 & nand_in2);
+
+

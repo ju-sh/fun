@@ -1,0 +1,45 @@
+MODULE main
+VAR
+    request: boolean;
+    status: {ready, busy};  -- an enum
+
+ASSIGN
+    init(status) := ready;
+    -- init of request not mentioned => 2 * states
+    
+    next(status) := case
+                        request: busy;
+                        TRUE: {ready, busy};  -- can go anywhere
+                    esac;
+
+-- NuSMV > check_ltlspec -p "G(request=FALSE)"
+-- -- specification  G request = FALSE  is false
+-- -- as demonstrated by the following execution sequence
+-- Trace Description: LTL Counterexample
+-- Trace Type: Counterexample
+--   -> State: 1.1 <-
+--     request = TRUE
+--     status = ready
+--   -- Loop starts here
+--   -> State: 1.2 <-
+--     request = FALSE
+--     status = busy
+--   -> State: 1.3 <-
+
+
+
+-- NuSMV > check_ltlspec -p "F(request=TRUE)"
+-- -- specification  F request = TRUE  is false
+-- -- as demonstrated by the following execution sequence
+-- Trace Description: LTL Counterexample
+-- Trace Type: Counterexample
+--   -- Loop starts here
+--   -> State: 1.1 <-
+--     request = FALSE
+--     status = ready
+--   -> State: 1.2 <-
+
+
+-- Combining G and F
+-- NuSMV > check_ltlspec -p "G(request=TRUE -> F(status=busy) )"
+-- -- specification  G (request = TRUE ->  F status = busy)  is true
