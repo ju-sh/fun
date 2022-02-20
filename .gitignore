@@ -1,5 +1,5 @@
 # Haskell
-*.h[is]
+*.hi
 *.o
 a.out
 
