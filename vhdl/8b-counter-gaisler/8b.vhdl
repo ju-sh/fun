@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-package counter8_comp is
+package counter8_pack is
   type counter8_in_type is record
     enable : std_logic;
     load   : std_logic;
@@ -29,7 +29,7 @@ end package;
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-use work.counter8_comp.all;
+use work.counter8_pack.all;
 
 entity counter8 is
   port(
