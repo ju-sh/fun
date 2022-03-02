@@ -1,5 +1,5 @@
 -- load and en won't have effect in the same clock.
--- load has more precedence.
+-- load has greater precedence.
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -21,8 +21,11 @@ begin
   begin
     if rising_edge(clk) then
       if load = '1' then
+        -- set counter to new value
         nextq <= data;
       elsif en = '1' then
+        -- keep counting
+        -- XXX: got to take care of counting down after "00"
         nextq <= std_logic_vector(to_unsigned((to_integer(unsigned(nextq)) - 1), 2));
       end if;
     end if;
