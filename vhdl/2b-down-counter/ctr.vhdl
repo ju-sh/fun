@@ -23,7 +23,7 @@ begin
       if load = '1' then
         -- set counter to new value
         nextq <= data;
-      elsif en = '1' then
+      elsif en = '1' and nextq /= "00" then
         -- keep counting
         -- XXX: got to take care of counting down after "00"
         nextq <= std_logic_vector(to_unsigned((to_integer(unsigned(nextq)) - 1), 2));
