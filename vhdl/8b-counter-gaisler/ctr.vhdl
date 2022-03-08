@@ -20,7 +20,7 @@ package counter8_pack is
       q   : out counter8_out_type
     );
   end component;
-end package;
+end counter8_pack;
 
 
 
