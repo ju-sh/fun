@@ -11,7 +11,7 @@ architecture arch_ent_ctr_tb of ent_ctr_tb is
   signal t_load : std_logic;
   signal t_data : std_logic_vector(1 downto 0);
   signal t_q    : std_logic_vector(1 downto 0);
-  constant CLOCK : integer := 20;
+  -- constant CLOCK : integer := 20;
 begin
   t_ctr: entity work.ent_ctr port map(
     t_clk, t_en, t_load, t_data, t_q

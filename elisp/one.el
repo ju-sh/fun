@@ -1,0 +1,5 @@
+(defun foomar ()
+  (interactive)
+  ;(message (region-beginning) (region-end))
+  (message (evil-visual-beginning) (evil-visual-end))
+)

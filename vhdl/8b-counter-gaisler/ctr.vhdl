@@ -1,51 +1,49 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-package counter8_pack is
-  type counter8_in_type is record
+package ctr_pack is
+  type ctr_in_type is record
     enable : std_logic;
     load   : std_logic;
     din    : std_logic_vector(7 downto 0);
   end record;
   
-  type counter8_out_type is record
+  type ctr_out_type is record
     zero   : std_logic;
     dout   : std_logic_vector(7 downto 0);
   end record;
   
-  component counter8
+  component ctr
     port(
       clk : in  std_logic;
-      d   : in  counter8_in_type;
-      q   : out counter8_out_type
+      d   : in  ctr_in_type;
+      q   : out ctr_out_type
     );
   end component;
-end counter8_pack;
+end ctr_pack;
 
-
-
-
+------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-use work.counter8_pack.all;
+use work.ctr_pack.all;
 
-entity counter8 is
+entity ent_ctr is
   port(
     clk : in  std_logic;
-    d   : in  counter8_in_type;
-    q   : out counter8_out_type
+    d   : in  ctr_in_type;
+    q   : out ctr_out_type
   );
-end counter8;
+end ent_ctr;
 
 
-architecture counter8_arch of counter8 is
+architecture arch_ent_ctr of ent_ctr is
   type reg_type is record
-    load: std_logic;
-    zero: std_logic;
     enable: std_logic;
-    dout: std_logic_vector(7 downto 0);
+    load  : std_logic;
+    data  : std_logic;
+    dout  : std_logic_vector(7 downto 0);
   end record;
 
   signal r, rin : reg_type;
@@ -91,7 +89,7 @@ begin
       r <= rin;
     end if;
   end process;
-end counter8_arch;
+end arch_ent_ctr;
 
 
 
