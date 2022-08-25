@@ -101,10 +101,14 @@ base
   :: Int    -- ^ base
   -> Int    -- ^ number n
   -> [Int]  -- ^ digits of n to the base n. LSB first.
-base b 0 = [0]
-base b n = rem : (base b q)
+base _ 0 = [0]
+base b n = helper b n
  where
-  (q,rem) = divMod n b
+  -- helper :: Int -> Int -> [Int]
+  helper b 0 = []
+  helper b n = rem : (helper b q)
+   where
+    (q,rem) = divMod n b
 
 
 bin :: Int -> [Int]
