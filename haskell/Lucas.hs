@@ -74,10 +74,13 @@ fmtOneLine
   :: Int    -- ^ Current level. Early lines have larger level. (Think of it as a buiildng)
   -> [Int]  -- ^ values of current line
   -> String -- ^ fmtAllLinesut line
-fmtOneLine i l = begg ++ body
+fmtOneLine i l = begg ++ bodyhead ++ bodytail
  where
-  begg = replicate (i-1) ' '
-  body = foldl (++) "" $ map ((++) " ") $ map show l
+  begg = replicate i ' '
+  digitstr = map show l
+  bodyhead = head digitstr
+  bodytail = foldl (++) "" $ map ((++) " ") $ tail digitstr
+  
 
 fmtAllLines
   :: Int     -- ^ limit
@@ -109,12 +112,3 @@ base b n = helper b n
   helper b n = rem : (helper b q)
    where
     (q,rem) = divMod n b
-
-
-bin :: Int -> [Int]
-bin = go [] where
-   go acc 0 = acc
-   go acc n = let (d, m) = n `divMod` 2 in go (m : acc) d
-
-
-
