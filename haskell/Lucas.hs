@@ -21,10 +21,12 @@ nCk
   :: Int  -- ^ n
   -> Int  -- ^ k
   -> Int  -- ^ nck
-nCk n k = mod (foldl (*) 1 $ map nCkBin $ zip nbinp kbinp) 2
+nCk n k = mod (product $ map nCkBin $ zip nbinp kbinp) 2  -- could've used flip
  where
-  nbin = bin n
-  kbin = bin k
+  --nbin = bin n
+  --kbin = bin k
+  nbin = base 2 n
+  kbin = base 2 k
   n1 = length nbin
   n2 = length kbin
   pad1 = replicate (n2-n1) 0
@@ -72,10 +74,10 @@ fmtOneLine
   :: Int    -- ^ Current level. Early lines have larger level. (Think of it as a buiildng)
   -> [Int]  -- ^ values of current line
   -> String -- ^ fmtAllLinesut line
-fmtOneLine i l = begg ++ begg ++ body
+fmtOneLine i l = begg ++ body
  where
-  begg = replicate (2*(i-1)) ' '
-  body = foldl (++) "" $ map ((++) "  ") $ map show l
+  begg = replicate (i-1) ' '
+  body = foldl (++) "" $ map ((++) " ") $ map show l
 
 fmtAllLines
   :: Int     -- ^ limit
@@ -94,7 +96,21 @@ interface n = fmtAllLines n ll
 --[ (3,x) | x <- [0..3]]
 
 
+-- | Find number to base b
+base
+  :: Int    -- ^ base
+  -> Int    -- ^ number n
+  -> [Int]  -- ^ digits of n to the base n. LSB first.
+base b 0 = [0]
+base b n = rem : (base b q)
+ where
+  (q,rem) = divMod n b
+
+
 bin :: Int -> [Int]
 bin = go [] where
    go acc 0 = acc
    go acc n = let (d, m) = n `divMod` 2 in go (m : acc) d
+
+
+
