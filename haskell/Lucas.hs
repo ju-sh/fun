@@ -112,3 +112,14 @@ base b n = helper b n
   helper b n = rem : (helper b q)
    where
     (q,rem) = divMod n b
+
+
+
+-- *Lucas> putStrLn $ interface 5
+-- 
+--      1
+--     1 1
+--    1 1 1
+--   1 1 1 1
+--  1 1 1 0 1
+-- 1 1 1 0 1 1
