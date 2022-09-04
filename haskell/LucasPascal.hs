@@ -1,10 +1,21 @@
+module Main where
+
 {-
+ - Level indexing starts from zero.
  - Levels on top are of smaller index.
+
+Level 0  |        1
+Level 1  |       1 1
+Level 2  |      1 0 1
+Level 3  |     1 1 1 1
+Level 4  |    1 0 0 0 1
  -}
+
+-- | Find number to base b
 nBaseB
-  :: Int
-  -> Int
-  -> [Int]
+  :: Int    -- ^ base
+  -> Int    -- ^ number n
+  -> [Int]  -- ^ digits of n to the base n. LSB first.
 nBaseB n b
   | n < b = [n]
   | otherwise = rem:nBaseB nxt b
@@ -22,16 +33,18 @@ nBaseB n b
 [1,2,1]
 -}
 
+-- | Find value for aCb where a and b ∈ {0, 1}
 nCkBin
-  :: (Int, Int)
-  -> Int
+  :: (Int, Int)  -- ^ a and b values as tuple
+  -> Int         -- ^ aCb value
 nCkBin (0, 1) = 0
 nCkBin _ = 1
 
+-- | Calculate nCr value
 nCr
-  :: Int
-  -> Int
-  -> Int
+  :: Int   -- ^ n
+  -> Int   -- ^ r
+  -> Int   -- ^ nCr
 nCr a b = product $ map nCkBin $ zip apad bpad
  where
   abin = nBaseB a 2
@@ -42,20 +55,23 @@ nCr a b = product $ map nCkBin $ zip apad bpad
   apad = abin ++ replicate (maxlen-alen) 0
   bpad = bbin ++ replicate (maxlen-blen) 0
 
+-- | Find values for one level
 oneLine
-  :: Int
-  -> [Int]
+  :: Int    -- ^ current level
+  -> [Int]  -- ^ values of the level
 oneLine lvl = [nCr lvl r | r <- [0..lvl]]
 
+-- | Find values of all levels
 allLines
-  :: Int
-  -> [[Int]]
+  :: Int      -- ^ maximum level
+  -> [[Int]]  -- ^ values of levels. Values of each level is in a separate list
 allLines maxLvl = [oneLine i | i <- [0..maxLvl]]
 
+-- | Find values of a level and format it as a string
 fmtOneLine
-  :: Int
-  -> Int
-  -> String
+  :: Int     -- ^ maximum level
+  -> Int     -- ^ current level
+  -> String  -- ^ formatted string
 fmtOneLine maxLvl lvl = begg ++ bodyhead ++ bodytail
  where
   begg = replicate (maxLvl-lvl) ' '
@@ -63,9 +79,11 @@ fmtOneLine maxLvl lvl = begg ++ bodyhead ++ bodytail
   bodyhead = head digitstr
   bodytail = foldl (++) "" $ map ((++) " ") $ tail digitstr
 
+
+-- | Find values of the entire Pascal triangle and format it as a string
 fmtAllLines
-  :: Int
-  -> String
+  :: Int     -- ^ maximum level
+  -> String  -- ^ formatted, read-to-print, string
 fmtAllLines maxLvl = foldl (++) ""  $ map ((++) "\n") strLines
  where
   strLines = [fmtOneLine maxLvl lvl | lvl <- [0..maxLvl]]
