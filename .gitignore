@@ -30,6 +30,10 @@ dist/
 # Vim
 *.sw[op]
 
+# Emacs
+*~
+\#*\#
+
 # Unit test / coverage reports
 .tox/
 .cache
